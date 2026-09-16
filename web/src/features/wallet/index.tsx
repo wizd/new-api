@@ -298,7 +298,7 @@ export function Wallet(props: WalletProps) {
               }
             >
               <div id='wallet-add-funds' className='scroll-mt-4'>
-                <RechargeFormCard>
+                <RechargeFormCard
                   topupInfo={topupInfo}
                   presetAmounts={presetAmounts}
                   selectedPreset={selectedPreset}
