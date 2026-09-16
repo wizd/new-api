@@ -19,30 +19,34 @@ For commercial licensing, please contact support@quantumnous.com
 import { useTranslation } from 'react-i18next'
 
 import { IconWeChat } from '@/assets/brand-icons'
-import { TitledCard } from '@/components/ui/titled-card'
-
-const COMMUNITY_QR_SRC = '/group-join.png'
+import groupJoinQr from '@/assets/group-join.png'
+import { IconBadge } from '@/components/ui/icon-badge'
 
 export function CommunityQrCard() {
   const { t } = useTranslation()
 
   return (
-    <TitledCard
-      title={t('Join the Community')}
-      description={t(
-        'Scan the WeChat QR code to join the community. You can discuss any questions there.'
-      )}
-      icon={<IconWeChat className='h-4 w-4' />}
-      iconTone='success'
-      disableHoverEffect
-    >
+    <section className='space-y-2.5 border-t pt-4 sm:space-y-3 sm:pt-6'>
+      <div className='flex items-center gap-2'>
+        <IconBadge tone='success' size='xs'>
+          <IconWeChat />
+        </IconBadge>
+        <h3 className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
+          {t('Join the Community')}
+        </h3>
+      </div>
+      <p className='text-muted-foreground text-sm leading-6'>
+        {t(
+          'Scan the WeChat QR code to join the community. You can discuss any questions there.'
+        )}
+      </p>
       <figure
         className='flex flex-col items-center gap-3'
         aria-label={t('WeChat community group QR code')}
       >
         <div className='w-full max-w-60 overflow-hidden rounded-2xl border bg-black shadow-sm'>
           <img
-            src={COMMUNITY_QR_SRC}
+            src={groupJoinQr}
             alt={t('WeChat community group QR code')}
             width={450}
             height={680}
@@ -53,6 +57,6 @@ export function CommunityQrCard() {
           {t('All questions are welcome in the community discussion.')}
         </figcaption>
       </figure>
-    </TitledCard>
+    </section>
   )
 }

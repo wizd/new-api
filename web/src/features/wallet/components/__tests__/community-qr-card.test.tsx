@@ -25,7 +25,9 @@ describe('community QR card', () => {
   it('shows the community invitation and a scannable WeChat QR image', () => {
     render(<CommunityQrCard />)
 
-    expect(screen.getByText('Join the Community')).toBeVisible()
+    expect(
+      screen.getByRole('heading', { name: 'Join the Community' })
+    ).toBeVisible()
     expect(
       screen.getByText(
         'Scan the WeChat QR code to join the community. You can discuss any questions there.'
@@ -45,7 +47,7 @@ describe('community QR card', () => {
       name: 'WeChat community group QR code',
     })
     expect(qr).toBeVisible()
-    expect(qr).toHaveAttribute('src', '/group-join.png')
+    expect(qr.getAttribute('src') ?? '').toMatch(/group-join/)
     expect(qr.parentElement).toHaveClass('max-w-60', 'overflow-hidden')
   })
 })

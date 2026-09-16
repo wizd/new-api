@@ -25,7 +25,6 @@ import { useSystemConfig } from '@/hooks/use-system-config'
 import { getSelf } from '@/lib/api'
 
 import { AffiliateRewardsCard } from './components/affiliate-rewards-card'
-import { CommunityQrCard } from './components/community-qr-card'
 import { BillingHistoryDialog } from './components/dialogs/billing-history-dialog'
 import { CreemConfirmDialog } from './components/dialogs/creem-confirm-dialog'
 import { PaymentConfirmDialog } from './components/dialogs/payment-confirm-dialog'
@@ -79,6 +78,7 @@ export function Wallet(props: WalletProps) {
   const [creemDialogOpen, setCreemDialogOpen] = useState(false)
   const [selectedCreemProduct, setSelectedCreemProduct] =
     useState<CreemProduct | null>(null)
+  const [showSubscriptionPanel, setShowSubscriptionPanel] = useState(true)
 
   const { status } = useStatus()
   const { currency } = useSystemConfig()
@@ -275,6 +275,13 @@ export function Wallet(props: WalletProps) {
     return topupInfo?.discount?.[topupAmount] || DEFAULT_DISCOUNT_RATE
   }, [topupInfo, topupAmount])
 
+  const handleSubscriptionAvailabilityChange = useCallback(
+    (available: boolean) => {
+      setShowSubscriptionPanel(available)
+    },
+    []
+  )
+
   return (
     <>
       <SectionPageLayout>
@@ -283,9 +290,15 @@ export function Wallet(props: WalletProps) {
           <div className='mx-auto flex w-full max-w-7xl flex-col gap-4 sm:gap-5'>
             <WalletStatsCard user={user} loading={userLoading} />
 
-            <div className='grid gap-4 xl:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.95fr)] xl:items-start'>
+            <div
+              className={
+                showSubscriptionPanel
+                  ? 'grid gap-4 xl:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.95fr)] xl:items-start'
+                  : 'grid gap-4'
+              }
+            >
               <div id='wallet-add-funds' className='scroll-mt-4'>
-                <RechargeFormCard
+                <RechargeFormCard>
                   topupInfo={topupInfo}
                   presetAmounts={presetAmounts}
                   selectedPreset={selectedPreset}
@@ -318,14 +331,12 @@ export function Wallet(props: WalletProps) {
                 />
               </div>
 
-              <div className='flex flex-col gap-4'>
-                <SubscriptionPlansCard
-                  topupInfo={topupInfo}
-                  userQuota={user?.quota}
-                  onPurchaseSuccess={fetchUser}
-                />
-                <CommunityQrCard />
-              </div>
+              <SubscriptionPlansCard
+                topupInfo={topupInfo}
+                onAvailabilityChange={handleSubscriptionAvailabilityChange}
+                userQuota={user?.quota}
+                onPurchaseSuccess={fetchUser}
+              />
             </div>
 
             <AffiliateRewardsCard
