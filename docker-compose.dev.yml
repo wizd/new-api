@@ -1,5 +1,9 @@
 # Frontend Development - Backend built from local source
 #
+# Local HTTP debug stack only (make dev / make dev-api). Keep Secure=false and
+# TRUSTED_URL unset so the :5173 -> :3000 proxy works. Production / Coolify
+# uses docker-compose.yml instead.
+#
 # Usage:
 #   1. docker compose -f docker-compose.dev.yml up -d
 #   2. make dev-web

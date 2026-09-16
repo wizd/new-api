@@ -153,6 +153,8 @@ docker run --name new-api -d --restart always \
 
 🎉 Après le déploiement, visitez `http://localhost:3000` pour commencer à utiliser!
 
+Debug frontend local : `make dev`, puis ouvrir `http://localhost:5173`. Debug natif : copier `.env.example` vers `.env` et définir `DEBUG=true`.
+
 > [!WARNING]
 > Lorsque vous exploitez ce projet en tant que service public d'IA générative ou service de revente d'API, les utilisateurs doivent d'abord remplir toutes les obligations requises en matière d'enregistrement, de licence, de sécurité du contenu, de vérification d'identité, de conservation des journaux, de fiscalité, de paiement et d'autorisation en amont.
 
@@ -398,6 +400,17 @@ docker run --name new-api -d --restart always \
 3. Installation en un clic
 
 📖 [Tutoriel avec des images](./docs/BT.md)
+
+</details>
+
+<details>
+<summary><strong>Méthode 4: Coolify</strong></summary>
+
+1. Créez une ressource à partir de ce dépôt Git et choisissez le Build Pack **Docker Compose** (`docker-compose.yml`).
+2. Définissez le domaine de `new-api` sur `https://votre.domaine:3000` (`:3000` est le port du conteneur ; le trafic public reste sur 443).
+3. Laissez `SESSION_COOKIE_SECURE` à false pour le premier déploiement. Avant la mise en ligne, passez-le à `true` et renseignez l'Origin HTTPS exacte dans `SESSION_COOKIE_TRUSTED_URL`. N'activez pas `DEBUG`.
+
+Coolify n'interpole que les `${VAR}` de `docker-compose.yml`. Il ne lit pas `.env.example`.
 
 </details>
 

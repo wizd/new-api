@@ -152,6 +152,8 @@ docker run --name new-api -d --restart always \
 
 🎉 部署完成後，訪問 `http://localhost:3000` 即可使用！
 
+本機前端除錯：執行 `make dev` 後開啟 `http://localhost:5173`。原生除錯：將 `.env.example` 複製為 `.env` 並設定 `DEBUG=true`。
+
 > [!WARNING]
 > 將本專案作為面向公眾的生成式 AI 服務或 API 轉售服務運營時，使用者應先完成備案、內容安全、實名、日誌留存、稅務、支付和上游授權等合規義務。
 
@@ -397,6 +399,17 @@ docker run --name new-api -d --restart always \
 3. 一鍵安裝
 
 📖 [圖文教學](./docs/BT.md)
+
+</details>
+
+<details>
+<summary><strong>方式 4：Coolify</strong></summary>
+
+1. 用本倉庫建立資源，Build Pack 選 **Docker Compose**（`docker-compose.yml`）。
+2. 將 `new-api` 的網域設為 `https://你的網域:3000`（`:3000` 表示容器內埠，公網仍走 443）。
+3. 首次部署保持 `SESSION_COOKIE_SECURE=false`。對外提供服務前改為 `true`，並在 `SESSION_COOKIE_TRUSTED_URL` 填入精確 HTTPS Origin。不要開啟 `DEBUG`。
+
+Coolify 只解析 `docker-compose.yml` 中的 `${VAR}`，不會讀取 `.env.example`。
 
 </details>
 

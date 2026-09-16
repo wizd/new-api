@@ -153,6 +153,8 @@ docker run --name new-api -d --restart always \
 
 🎉 デプロイが完了したら、`http://localhost:3000` にアクセスして使用を開始してください！
 
+ローカルのフロントエンドデバッグは `make dev` のあと `http://localhost:5173` を開きます。ネイティブデバッグは `.env.example` を `.env` にコピーし、`DEBUG=true` を設定します。
+
 > [!WARNING]
 > 本プロジェクトを公衆向け生成 AI サービスまたは API 再販サービスとして運営する場合、ユーザーは届出、コンテンツセキュリティ、本人確認、ログ保持、税務、決済、上流認可などの必要なコンプライアンス義務を先に完了してください。
 
@@ -398,6 +400,17 @@ docker run --name new-api -d --restart always \
 1. 宝塔パネル（**9.2.0バージョン**以上）をインストールし、アプリケーションストアで**New-API**を検索してインストールします。
 
 📖 [画像付きチュートリアル](./docs/BT.md)
+
+</details>
+
+<details>
+<summary><strong>方法 4: Coolify</strong></summary>
+
+1. この Git リポジトリからリソースを作成し、Build Pack を **Docker Compose**（`docker-compose.yml`）にします。
+2. `new-api` のドメインを `https://your.domain:3000` に設定します（`:3000` はコンテナ内ポートで、公開通信は引き続き 443 です）。
+3. 初回デプロイでは `SESSION_COOKIE_SECURE` を false のままにします。公開前に `true` にし、`SESSION_COOKIE_TRUSTED_URL` へ正確な HTTPS Origin を入れます。`DEBUG` は有効にしないでください。
+
+Coolify は `docker-compose.yml` の `${VAR}` だけを補間し、`.env.example` は読みません。
 
 </details>
 
