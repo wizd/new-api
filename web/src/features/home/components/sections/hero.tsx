@@ -16,12 +16,18 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
-import { CherryStudio } from '@lobehub/icons'
+import { CherryStudio, DeepSeek } from '@lobehub/icons'
 import { Link } from '@tanstack/react-router'
 import { ArrowRight, BookOpen } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { useStatus } from '@/hooks/use-status'
 
 import { HeroTerminalDemo } from '../hero-terminal-demo'
@@ -185,15 +191,19 @@ export function Hero(props: HeroProps) {
               </p>
             </div>
             <div className='flex flex-wrap items-center gap-3'>
-              {/* Cherry Studio */}
+              {/* Official mark: https://github.com/aaif-goose/goose/blob/main/documentation/static/img/goose.svg */}
               <a
-                href='https://cherry-ai.com'
+                href='https://goose.vcorp.ai/zh-Hans/'
                 target='_blank'
                 rel='noopener noreferrer'
                 className='group border-border/40 bg-muted/15 text-foreground/80 hover:border-border hover:bg-muted/30 hover:text-foreground flex items-center gap-3 rounded-full border px-5 py-2.5 text-sm font-medium shadow-[0_1px_2.5px_rgba(0,0,0,0.01)] backdrop-blur-xs transition-all duration-300 hover:scale-[1.02]'
               >
-                <CherryStudio.Color size={24} className='shrink-0' />
-                <span>Cherry Studio</span>
+                <img
+                  src='/goose-logo.svg'
+                  alt=''
+                  className='size-6 shrink-0 dark:invert'
+                />
+                <span>goose</span>
               </a>
 
               {/* CC Switch */}
@@ -223,11 +233,49 @@ export function Hero(props: HeroProps) {
                 <span>CC Switch</span>
               </a>
 
-              {/* "更多" */}
-              <div className='group border-border/40 bg-muted/15 text-foreground/55 hover:border-border hover:bg-muted/30 hover:text-foreground flex cursor-default items-center gap-2.5 rounded-full border px-5 py-2.5 text-sm font-medium shadow-[0_1px_2.5px_rgba(0,0,0,0.01)] backdrop-blur-xs transition-all duration-300 hover:scale-[1.02]'>
-                <MoreIcon />
-                <span>{t('More Apps')}</span>
-              </div>
+              <DropdownMenu modal={false}>
+                <DropdownMenuTrigger
+                  render={
+                    <Button
+                      variant='ghost'
+                      className='group border-border/40 bg-muted/15 text-foreground/55 hover:border-border hover:bg-muted/30 hover:text-foreground h-auto gap-2.5 rounded-full border px-5 py-2.5 text-sm font-medium shadow-[0_1px_2.5px_rgba(0,0,0,0.01)] backdrop-blur-xs transition-all duration-300 hover:scale-[1.02]'
+                    />
+                  }
+                >
+                  <MoreIcon />
+                  <span>{t('More Apps')}</span>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align='start' className='w-auto min-w-52'>
+                  <DropdownMenuItem
+                    render={
+                      <a
+                        href='https://cherry-ai.com'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      />
+                    }
+                  >
+                    <span aria-hidden='true' className='inline-flex'>
+                      <CherryStudio.Color size={16} />
+                    </span>
+                    Cherry Studio
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    render={
+                      <a
+                        href='https://deepseek.com/harness/'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      />
+                    }
+                  >
+                    <span aria-hidden='true' className='inline-flex'>
+                      <DeepSeek.Color size={16} />
+                    </span>
+                    DeepSeek Harness
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </div>
