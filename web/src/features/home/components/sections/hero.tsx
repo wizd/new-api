@@ -206,31 +206,19 @@ export function Hero(props: HeroProps) {
                 <span>goose</span>
               </a>
 
-              {/* CC Switch */}
+              {/* Official mark: https://github.com/yetone/magpie/blob/main/site/public/img/magpie-small.svg */}
               <a
-                href='https://ccswitch.io'
+                href='https://usemagpie.ai/zh/'
                 target='_blank'
                 rel='noopener noreferrer'
                 className='group border-border/40 bg-muted/15 text-foreground/80 hover:border-border hover:bg-muted/30 hover:text-foreground flex items-center gap-3 rounded-full border px-5 py-2.5 text-sm font-medium shadow-[0_1px_2.5px_rgba(0,0,0,0.01)] backdrop-blur-xs transition-all duration-300 hover:scale-[1.02]'
               >
                 <img
-                  src='https://ccswitch.io/favicon.png'
-                  alt='CC Switch'
-                  className='size-6 shrink-0 rounded-md object-contain'
-                  onError={(e) => {
-                    // Fallback to a styled text avatar if the remote favicon fails to load in sandbox or local environments
-                    e.currentTarget.style.display = 'none'
-                    const fallback = e.currentTarget.nextSibling as HTMLElement
-                    if (fallback) fallback.style.display = 'flex'
-                  }}
+                  src='/magpie-logo.svg'
+                  alt=''
+                  className='size-6 shrink-0 dark:invert'
                 />
-                <span
-                  style={{ display: 'none' }}
-                  className='size-6 shrink-0 items-center justify-center rounded-md bg-blue-500/10 text-[10px] font-bold text-blue-600 dark:bg-blue-400/10 dark:text-blue-400'
-                >
-                  CC
-                </span>
-                <span>CC Switch</span>
+                <span>magpie</span>
               </a>
 
               <DropdownMenu modal={false}>
@@ -246,6 +234,24 @@ export function Hero(props: HeroProps) {
                   <span>{t('More Apps')}</span>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align='start' className='w-auto min-w-52'>
+                  <DropdownMenuItem
+                    render={
+                      <a
+                        href='https://ccswitch.io'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      />
+                    }
+                  >
+                    <span aria-hidden='true' className='inline-flex'>
+                      <img
+                        src='https://ccswitch.io/favicon.png'
+                        alt=''
+                        className='size-4 shrink-0 rounded-sm object-contain'
+                      />
+                    </span>
+                    CC Switch
+                  </DropdownMenuItem>
                   <DropdownMenuItem
                     render={
                       <a

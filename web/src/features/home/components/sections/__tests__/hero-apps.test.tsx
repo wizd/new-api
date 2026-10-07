@@ -88,11 +88,21 @@ it('lists goose first among supported apps and links it to the Chinese community
   )
   expect(links[0].querySelector('img')).toHaveClass('dark:invert')
 
-  expect(links[1]).toHaveAccessibleName(/CC Switch/)
+  expect(links).toHaveLength(2)
+  expect(links[1]).toHaveAccessibleName('magpie')
+  expect(links[1]).toHaveAttribute('href', 'https://usemagpie.ai/zh/')
+  expect(links[1]).toHaveAttribute('target', '_blank')
+  expect(links[1]).toHaveAttribute('rel', 'noopener noreferrer')
+  expect(links[1].querySelector('img')).toHaveAttribute(
+    'src',
+    '/magpie-logo.svg'
+  )
+  expect(links[1].querySelector('img')).toHaveClass('dark:invert')
   expect(
     links[0].compareDocumentPosition(links[1]) &
       Node.DOCUMENT_POSITION_FOLLOWING
   ).toBeTruthy()
+  expect(screen.queryByRole('menuitem', { name: 'CC Switch' })).toBeNull()
   expect(screen.queryByRole('menuitem', { name: 'Cherry Studio' })).toBeNull()
 })
 
@@ -104,11 +114,16 @@ it('opens more apps and links Cherry Studio and DeepSeek Harness', async () => {
   await userEvent.click(more)
   expect(more).toHaveAttribute('aria-expanded', 'true')
 
+  const ccSwitch = screen.getByRole('menuitem', { name: 'CC Switch' })
   const cherry = screen.getByRole('menuitem', { name: 'Cherry Studio' })
   const harness = screen.getByRole('menuitem', { name: 'DeepSeek Harness' })
+  expect(ccSwitch).toHaveAttribute('href', 'https://ccswitch.io')
   expect(cherry).toHaveAttribute('href', 'https://cherry-ai.com')
   expect(harness).toHaveAttribute('href', 'https://deepseek.com/harness/')
-  for (const link of [cherry, harness]) {
+  expect(
+    ccSwitch.compareDocumentPosition(cherry) & Node.DOCUMENT_POSITION_FOLLOWING
+  ).toBeTruthy()
+  for (const link of [ccSwitch, cherry, harness]) {
     expect(link).toHaveAttribute('target', '_blank')
     expect(link).toHaveAttribute('rel', 'noopener noreferrer')
   }
