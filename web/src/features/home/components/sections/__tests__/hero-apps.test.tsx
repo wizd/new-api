@@ -49,8 +49,13 @@ function renderHero() {
     path: '/dashboard',
     component: () => null,
   })
+  const onboard = createRoute({
+    getParentRoute: () => root,
+    path: '/onboard',
+    component: () => null,
+  })
   const router = createRouter({
-    routeTree: root.addChildren([signUp, pricing, dashboard]),
+    routeTree: root.addChildren([signUp, pricing, dashboard, onboard]),
     history: createMemoryHistory({ initialEntries: ['/'] }),
   })
   const client = new QueryClient({
