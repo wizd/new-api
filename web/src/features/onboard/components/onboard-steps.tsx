@@ -22,7 +22,9 @@ import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
 
 import {
+  FRIEND_QR_HEIGHT,
   FRIEND_QR_SRC,
+  FRIEND_QR_WIDTH,
   GROUP_QR_HEIGHT,
   GROUP_QR_SRC,
   GROUP_QR_WIDTH,
@@ -99,6 +101,8 @@ export function OnboardSteps(props: OnboardStepsProps) {
                   <img
                     src={FRIEND_QR_SRC}
                     alt={t('WeChat friend QR code')}
+                    width={FRIEND_QR_WIDTH}
+                    height={FRIEND_QR_HEIGHT}
                     className='block h-auto w-full'
                     loading='lazy'
                   />

@@ -17,8 +17,10 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 
-/** Public path of the operator's personal WeChat QR. Leave empty until the image is in web/public. */
-export const FRIEND_QR_SRC: string = ''
+/** Personal WeChat QR of the operator who confirms newcomer bonuses. */
+export const FRIEND_QR_SRC: string = '/Summer_QRCode.jpg'
+export const FRIEND_QR_WIDTH = 1029
+export const FRIEND_QR_HEIGHT = 1410
 
 export const GROUP_QR_SRC = '/加群二维码.jpg'
 export const GROUP_QR_WIDTH = 1044

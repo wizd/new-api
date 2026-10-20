@@ -121,13 +121,16 @@ it('links back home and shows the group QR code and poster', async () => {
   expect(download).toHaveAttribute('href', '/海报-学校.jpg')
 })
 
-it('shows a placeholder when the WeChat friend QR code is not configured', async () => {
+it('shows the operator WeChat QR code for the newcomer bonus', async () => {
   renderOnboard()
 
+  const friendQr = await screen.findByRole('img', {
+    name: 'WeChat friend QR code',
+  })
+  expect(friendQr).toHaveAttribute('src', '/Summer_QRCode.jpg')
+  expect(friendQr).toHaveAttribute('width', '1029')
+  expect(friendQr).toHaveAttribute('height', '1410')
   expect(
-    await screen.findByRole('status', { name: 'QR code coming soon' })
-  ).toBeVisible()
-  expect(
-    screen.queryByRole('img', { name: 'WeChat friend QR code' })
+    screen.queryByRole('status', { name: 'QR code coming soon' })
   ).toBeNull()
 })
