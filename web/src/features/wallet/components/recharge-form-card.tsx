@@ -51,7 +51,6 @@ import type {
   CreemProduct,
   WaffoPayMethod,
 } from '../types'
-import { CommunityQrCard } from './community-qr-card'
 import { CreemProductsSection } from './creem-products-section'
 
 interface RechargeFormCardProps {
@@ -570,8 +569,6 @@ export function RechargeFormCard({
           </AlertDescription>
         </Alert>
       )}
-
-      <CommunityQrCard />
     </TitledCard>
   )
 }
